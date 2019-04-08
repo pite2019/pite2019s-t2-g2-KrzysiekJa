@@ -76,16 +76,16 @@ def main():
         bank2.addClient(new_clients_list[i], new_clients_list[i+1], new_clients_list[i+2])
         print('Added to ', bank2.bankName, ': ',new_clients_list[i], new_clients_list[i+1])
     
-    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank1.bankMoney, "\n")
+    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank2.bankMoney, "\n")
     print(bank1.bankName, ":\n", bank1.information_storage, "\n", bank2.bankName, ":\n", bank2.information_storage) 
     
     bank2.delClient('Wladimir', 'Putin')
-    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank1.bankMoney, "\n")
+    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank2.bankMoney, "\n")
     
     bank2.moneyChangeClients(1, 2, 500) 
     bank2.addClient('Filipiak', 'Janusz', 45000000)
     
-    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank1.bankMoney, "\n")
+    print("\n", bank1.bankName, ":\n", bank1.bankMoney, "\n", bank2.bankName, ":\n", bank2.bankMoney, "\n")
     bank1.addInformation('Ministry of Finance: Prima Aprilis.')
     print("\n",bank1.bankName, ":\n", bank1.information_storage, "\n", bank2.bankName, ":\n", bank2.information_storage)
 
