@@ -9,7 +9,7 @@ class Bank:
         self.bank_money = bank_money
         self.__clients_file = '%sfile.txt' %(self.bank_name)
         
-        file = open(self.__clients_file, 'x')
+        file = open(self.__clients_file, 'w')
         file.close()
         
     def creAccount(self, name, last_name, amount):
@@ -28,6 +28,7 @@ class Bank:
         return client
        
     def delAccount(self, name, last_name):
+        tmp = 0
         with open(self.__clients_file, 'r') as file:
             lines = file.readlines()
         file = open(self.__clients_file, 'w')
@@ -40,13 +41,13 @@ class Bank:
             file.write(indx)
         file.close()
         
-        try:
+        if tmp == 0:
+            return 'Not exist.'
+        else:
             return tmp
-        except:
-            raise NameError('None exist.')
         
     def moneyDeposit(self, name, last_name, change):
-        self.bank_money += change
+        tmp = 0
         with open(self.__clients_file, 'r+') as file:
             lines = file.readlines()
             file.seek(0)
@@ -61,13 +62,14 @@ class Bank:
             file.truncate()
         file.close()
         
-        try:
+        if tmp == 0:
+            return 'Not exist.'
+        else:
+            self.bank_money += change
             return tmp
-        except:
-            raise NameError('None exist.')
             
     def moneyWithdrawal(self, name, last_name, change):
-        self.bank_money -= change
+        tmp   = 0
         error = 0
         with open(self.__clients_file, 'r') as file:
             lines = file.readlines()
@@ -88,10 +90,11 @@ class Bank:
         
         if error == 1:
             return "Operation failed- not enough money."
-        try:
+        if tmp == 0:
+            return 'Not exist.'
+        else:
+            self.bank_money -= change
             return tmp
-        except:
-            raise NameError('None exist.')
     
     def exchangeBetwClients(self, name, last_name, nameX, last_nameX, exchange):
         try:
@@ -102,6 +105,7 @@ class Bank:
             moneyDeposit(nameX, last_nameX, exchange)
     
     def giveCredit(self, name, last_name, amount):
+        tmp = 0
         if amount > 0.1 * self.bank_money:
             return "Unfortunately, not possible."
         with open(self.__clients_file, 'r') as file:
@@ -117,10 +121,12 @@ class Bank:
                 file.write(indx)
         file.close()
         
-        try:
+        if tmp == 0:
+            return 'None exist.'
+        else:
+            self.bank_money -= amount
             return tmp
-        except:
-            raise NameError('None exist.')
+    
 
 
 
@@ -131,7 +137,7 @@ def main():
     bank3 = Bank("Transfer Bank", 1500000000)
     
     
-    new_clients_list = ['Licciardi', 'Vincenzo', 30000000, 'David', 'Rockeffeler', 180000000, 'Wlad', 'Dracula', 15000000, 'Geogre', 'Soros', 2500000, 'Wladimir', 'Putin', 10000000000]
+    new_clients_list = ['Vincenzo', 'Licciardi', 30000000, 'David', 'Rockeffeler', 180000000, 'Wlad', 'Dracula', 15000000, 'Geogre', 'Soros', 2500000, 'Wladimir', 'Putin', 10000000000]
     
     for i in range (0, len(new_clients_list) - 2, 3):
         result = bank1.creAccount(new_clients_list[i], new_clients_list[i+1], new_clients_list[i+2])
@@ -143,10 +149,10 @@ def main():
         result = bank2.creAccount(new_clients_list[i], new_clients_list[i+1], new_clients_list[i+2])
         print('Added to ', bank2.bank_name, ': ', result)
     
-    new_clients_list = ['Filipiak', 'Janusz', 45000000,]
+    new_clients_list = ['Janusz', 'Filipiak', 45000000, 'Jan', 'Kulczyk', 85000000, 'Warren', 'Buffett', 1000000000]
     
     for i in range (0, len(new_clients_list) - 2, 3):
-        result = bank2.creAccount(new_clients_list[i], new_clients_list[i+1], new_clients_list[i+2])
+        result = bank3.creAccount(new_clients_list[i], new_clients_list[i+1], new_clients_list[i+2])
         print('Added to ', bank3.bank_name, ': ', result)
     
     
