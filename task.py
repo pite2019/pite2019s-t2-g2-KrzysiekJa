@@ -84,6 +84,7 @@ class Bank:
                     continue
                 file.write(indx)
         file.close()
+        
         if error == 1:
             return "Operation failed- not enough money."
         try:
